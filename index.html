@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MeowsRadio – La radio della Piaget</title>
+
+<style>
+:root{
+    --bg:#051242;
+    --accent:#00f7ff;
+    --glass:rgba(255,255,255,0.08);
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:radial-gradient(circle at top,var(--bg),#020822);
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* LOGO */
+.logo{
+    display:block;
+    margin:90px auto 30px;
+    max-width:260px;
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+}
+
+/* MENU */
+.menu-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    font-size:32px;
+    cursor:pointer;
+    z-index:1002;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:1000;
+}
+
+.overlay.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.menu{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:260px;
+    height:100%;
+    background:rgba(5,18,66,0.95);
+    backdrop-filter:blur(15px);
+    padding:80px 30px;
+    transition:.4s;
+    z-index:1001;
+}
+
+.menu a{
+    display:block;
+    margin:20px 0;
+    font-size:1.2rem;
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:var(--accent);
+    transform:translateX(8px);
+}
+
+.menu.open{right:0}
+
+/* SEZIONI */
+section{
+    padding:80px 20px;
+    text-align:center;
+    max-width:1100px;
+    margin:auto;
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+section.show{
+    opacity:1;
+    transform:none;
+}
+
+h1{font-size:3rem}
+h2{
+    font-size:2.2rem;
+    margin-bottom:30px;
+    border-bottom:2px solid var(--accent);
+    display:inline-block;
+}
+
+p{max-width:800px;margin:20px auto}
+
+/* VIDEO */
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+iframe{
+    width:100%;
+    height:220px;
+    border-radius:15px;
+    transition:.4s;
+}
+
+iframe:hover{
+    transform:scale(1.04);
+    box-shadow:0 0 20px var(--accent);
+}
+
+/* FAQ */
+.faq{
+    max-width:800px;
+    margin:30px auto;
+    text-align:left;
+}
+
+.faq-item{
+    background:var(--glass);
+    margin:15px 0;
+    padding:20px;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.faq-item h3{
+    margin:0;
+    display:flex;
+    justify-content:space-between;
+}
+
+.faq-item p{
+    max-height:0;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.faq-item.open p{
+    max-height:400px;
+    margin-top:10px;
+}
+
+/* PARTECIPA */
+.form-box{
+    max-width:600px;
+    margin:40px auto;
+    background:var(--glass);
+    padding:30px;
+    border-radius:20px;
+}
+
+form input, form textarea, form select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    background:#020822;
+    color:white;
+    font-size:1rem;
+}
+
+form textarea{resize:none;height:120px}
+
+form button{
+    margin-top:15px;
+    padding:12px 30px;
+    font-size:1.1rem;
+    border:none;
+    border-radius:30px;
+    background:var(--accent);
+    color:#000;
+    cursor:pointer;
+    transition:.3s;
+}
+
+form button:hover{
+    transform:scale(1.05);
+}
+
+/* FOOTER */
+footer{
+    padding:40px;
+    opacity:.7;
+    text-align:center;
+}
+
+/* RESPONSIVE */
+@media (max-width:600px){
+    h1{font-size:2.2rem}
+    h2{font-size:1.8rem}
+    .logo{max-width:200px;margin-top:70px}
+    iframe{height:180px}
+    section{padding:60px 15px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu-btn" id="menuBtn">⋮</div>
+<div class="overlay" id="overlay"></div>
+
+<div class="menu" id="menu">
+    <a href="#home">Home</a>
+    <a href="#live">Live</a>
+    <a href="#podcast">Podcast</a>
+    <a href="#faq">FAQ</a>
+    <a href="#partecipa">Partecipa</a>
+</div>
+
+<img src="img2/meows.jpg" alt="Logo MeowsRadio" class="logo">
+
+<section id="home">
+<h1>MeowsRadio</h1>
+<p><strong>La radio della Piaget</strong></p>
+<p>
+Dal 2023 studenti e professori portano avanti un progetto vero, vivo e rumoroso:
+live, podcast e collaborazioni con studi radiofonici.
+<br><br>
+Qui impari a stare davanti e dietro al microfono.
+<strong>Questa è MeowsRadio.</strong>
+</p>
+</section>
+
+<section id="live">
+<h2>Live del martedì</h2>
+<div class="video-grid">
+<iframe loading="lazy" src="https://www.youtube.com/embed/nbVWJTs5hM4" allowfullscreen></iframe>
+<iframe loading="lazy" src="https://www.youtube.com/embed/D3iSgeHqhtk" allowfullscreen></iframe>
+<iframe loading="lazy" src="https://www.youtube.com/embed/6U9NbJ9GsrA" allowfullscreen></iframe>
+</div>
+</section>
+
+<section id="podcast">
+<h2>I nostri Podcast</h2>
+<div class="video-grid">
+<iframe loading="lazy" src="https://www.youtube.com/embed/Brg3P3dCoFc" allowfullscreen></iframe>
+<iframe loading="lazy" src="https://www.youtube.com/embed/cNjCOUFpjfY" allowfullscreen></iframe>
+<iframe loading="lazy" src="https://www.youtube.com/embed/uTtiHt1wmrs" allowfullscreen></iframe>
+</div>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<div class="faq">
+
+<div class="faq-item">
+<h3>Chi può partecipare?<span>+</span></h3>
+<p>Tutti gli studenti della Piaget, anche senza esperienza.</p>
+</div>
+
+<div class="faq-item">
+<h3>Serve saper parlare in radio?<span>+</span></h3>
+<p>
+No! Con il nostro aiuto imparerai a usare programmi di registrazione,
+fare dirette viste da tutta la scuola, utilizzare il mixer e capire
+la parte tecnica della radio. Inoltre imparerai a progettare una diretta
+con scalette e riunioni con i compagni.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Quando andate in diretta?<span>+</span></h3>
+<p>
+Ogni martedì con live e contenuti originali di ogni tipo.
+L’importante è avere voglia, ambizione e fantasia!
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Quanto dura il laboratorio?<span>+</span></h3>
+<p>
+Puoi decidere se partecipare nel primo quadrimestre,
+nel secondo oppure per tutto l’anno scolastico.
+Il laboratorio si svolge ogni martedì, con la possibile
+aggiunta di un giorno extra il prossimo anno.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Sono previste uscite durante il laboratorio?<span>+</span></h3>
+<p>
+Assolutamente sì! Sono previste diverse uscite, come già successo
+alla scuola primaria Foce A. Maggiani, per realizzare dirette,
+collaborare e divertirsi insieme anche fuori dalla scuola.
+</p>
+</div>
+
+</div>
+</section>
+
+<section id="partecipa">
+<h2>Partecipa a MeowsRadio</h2>
+<p>
+Vuoi entrare nella radio della scuola? Compila il form e raccontaci
+chi sei e cosa ti piacerebbe fare 🎧
+</p>
+
+<button type="button" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeg-T1wQiwY1OxiH1s--Y1VgIslsskSVj1WQiHW6upxM2-IVQ/viewform?usp=header')">
+  Invia richiesta
+</button>
+
+</form>
+
+</div>
+</section>
+
+<footer>
+© 2023 – MeowsRadio | La radio della Piaget
+</footer>
+
+<script>
+const btn=document.getElementById("menuBtn");
+const menu=document.getElementById("menu");
+const overlay=document.getElementById("overlay");
+
+function closeMenu(){
+    menu.classList.remove("open");
+    overlay.classList.remove("show");
+}
+
+btn.onclick=()=>{
+    menu.classList.toggle("open");
+    overlay.classList.toggle("show");
+};
+
+overlay.onclick=closeMenu;
+document.querySelectorAll(".menu a").forEach(a=>{
+    a.onclick=closeMenu;
+});
+
+// SCROLL ANIMATION
+const sections=document.querySelectorAll("section");
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting)e.target.classList.add("show");
+});
+},{threshold:0.2});
+
+sections.forEach(s=>observer.observe(s));
+
+// FAQ
+document.querySelectorAll(".faq-item").forEach(item=>{
+item.onclick=()=>item.classList.toggle("open");
+});
+</script>
+
+</body>
+</html>
